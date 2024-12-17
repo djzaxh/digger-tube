@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - DiggerTube</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Admin Panel</h1>
+    <h2>Add Video</h2>
+    <form action="/add-video" method="POST" enctype="multipart/form-data">
+      <label>Video Source (URL):</label>
+      <input type="text" name="src" placeholder="Enter video source URL" />
+      <label>OR Upload a Video File:</label>
+      <input type="file" name="video_file" accept="video/*" />
+
+      <label>Title for Video</label>
+      <input type="text" name="name" placeholder="Name for Video" required />
+      <button type="submit">Add Video</button>
+    </form>
+
+    {% if error_message %}
+    <h2 style="color: red; margin-top: 20px">{{ error_message }}</h2>
+    {% endif %}
+
+    <div class="container-coral">
+      <h2>Current Videos</h2>
+      {% if videos %}
+      <ul>
+        {% for video in videos %}
+        <li>
+          <p>{{ video.name }}</p>
+          <p>{{ video.src }}</p>
+
+          <!-- Video preview -->
+          <video controls muted>
+            {% if video.type == 'url' %}
+            <source src="{{ video.src }}" type="{{ video.mime_type }}" />
+            {% elif video.type == 'file' %}
+            <source
+              src="{{ url_for('uploaded_file', filename=video.src.split('/')[-1]) }}"
+              type="{{ video.mime_type }}"
+            />
+            {% endif %} Your browser does not support the video tag.
+          </video>
+
+          <!-- Delete Button with POST method and hidden input for 'src' -->
+          <form action="/delete-video" method="POST" style="display: inline">
+            <input type="hidden" name="src" value="{{ video.src }}" />
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No videos added yet.</p>
+      {% endif %}
+    </div>
+
+    <a href="/" class="btn">Back to Home</a>
+    <a href="/logout" class="btn">Logout</a>
+  </body>
+</html>

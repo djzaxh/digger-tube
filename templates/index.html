@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>DiggerTube</title>
+    <link rel="stylesheet" href="static/styles.css" />
+  </head>
+  <body>
+    <!-- <strong><h1 style="font-size: 100px">Dreamy Diggers</h1></strong> -->
+    <img src="static/DiggerTube.png" />
+    <div class="container-yellow">
+      <h2>Excavators lined up</h2>
+      <video controls muted>
+        <source
+          src="https://videos.pexels.com/video-files/7791770/7791770-uhd_3840_2160_30fps.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+      </div>
+      <div class="container-coral">
+        <h2>Backhoe digging hole in ground</h2>
+      <video controls muted>
+        <source
+          src="https://videos.pexels.com/video-files/853867/853867-hd_1920_1080_25fps.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="container-teal">
+      <h2>Front Loader moving dirt</h2>
+      <video controls muted>
+        <source
+          src="https://videos.pexels.com/video-files/3818273/3818273-uhd_3840_2160_30fps.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="container-teal">
+      <h2>Mountain Excavation Site</h2>
+      <video controls muted>
+        <source
+          src="https://videos.pexels.com/video-files/855195/855195-uhd_3840_2160_30fps.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+    <div class="container-yellow">
+      <h2>Diggers digging in a pile of dirt</h2>
+      <video controls muted>
+        <source
+          src="https://videos.pexels.com/video-files/12060119/12060119-hd_1920_1080_60fps.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+    <div class="container-teal">
+      <h2>Excavator working on a building site</h2>
+      <video controls muted>
+        <source
+          src="https://videos.pexels.com/video-files/2938859/2938859-uhd_4096_2160_24fps.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+
+      {% if videos %}
+          {% for video in videos %}
+              <div class="container-coral">
+                  {{ video.htmlcode|safe }}
+              </div>
+          {% endfor %}
+      {% else %}
+      {% endif %}
+    </div>
+  </body>
+</html>
